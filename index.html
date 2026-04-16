@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VESPERA | Portal</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/AK1Hbub.png">
+    <link rel="stylesheet" href="portal-style.css">
+</head>
+<body>
+
+<div id="landing-page">
+    <div class="landing-bg-overlay"></div>
+    <div class="landing-container">
+        <div class="split-section light" onmouseover="setBg('light')" onmouseout="clearBg()" onclick="enterDirune()">
+            <div class="path-content">
+                <h3>白晝的餘溫</h3>
+                <p class="path-desc">尋找一抹溫暖的奶油焦香...</p>
+            </div>
+        </div>
+
+        <div class="vespera-core">
+            <h1 class="vespera-title">VESPERA</h1>
+            <div class="vespera-divider"></div>
+            <p class="vespera-story">
+                Vespera —— 拉丁語，意為「黃昏」。<br><br>
+                黃昏，是日與夜最曖昧的界線，<br>
+                是現世與異界最容易交錯的逢魔之刻。<br><br>
+                許多旅人在這一刻不小心迷路……<br>
+                踏入了再也回不去的神隱之路。<br><br>
+                在VESPERA，我們為所有迷途的靈魂，<br>
+                悄悄點亮了兩盞燈。<br><br>
+                你，會選擇哪一條路，作為今晚的歸宿？
+            </p>
+        </div>
+
+        <div class="split-section dark" onmouseover="setBg('dark')" onmouseout="clearBg()" onclick="enterNoctis()">
+            <div class="path-content">
+                <h3>黑夜的誘惑</h3>
+                <p class="path-desc">墮落於迷人神秘的紫色幽夢...</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

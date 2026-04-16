@@ -1,0 +1,613 @@
+:root {
+    --bg-base: #dccdc0; 
+    --bg-card: #c9b9a8; 
+    --text-main: #5d4037; 
+    --text-light: rgba(255, 255, 255, 0.9);
+    --nav-bg: rgba(45, 65, 75, 0.85); 
+    --accent: #81d4fa; 
+    --accent-soft: rgba(129, 212, 250, 0.2);
+    --dirune-bg: #e2d5c5;
+    --dirune-card: #f5ede2;
+    --dirune-brown: #5d4037;
+    --dirune-accent: #8D6E63;
+}
+
+body, html {
+    margin: 0; padding: 0;
+    height: 100%; width: 100%;
+    font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+    background-color: var(--bg-base);
+    color: var(--text-main);
+    overflow: hidden;
+}
+
+/* --- 恢復 VESPERA 原本的高級感導覽列 --- */
+
+header {
+    position: fixed;
+    top: 0; left: 0; width: 100%; 
+    height: 85px; 
+    background-color: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    z-index: 1000;
+}
+
+nav ul {
+    list-style: none; 
+    display: flex; 
+    gap: 65px;
+    margin: 0; 
+    padding: 0;
+}
+
+nav ul li {
+    font-family: "Microsoft JhengHei", sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: rgba(255, 255, 255, 0.8); /* 恢復原本的優雅白 */
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s ease, transform 0.2s ease;
+}
+
+/* 滑鼠懸停時的效果 */
+nav ul li:hover, 
+nav ul li.active {
+    color: #ffffff;
+}
+
+/* 經典的藍色底線動畫 */
+nav ul li::after {
+    content: ''; 
+    display: block; 
+    width: 0; 
+    height: 2px;
+    background-color: #66ccff; 
+    position: absolute;
+    bottom: -8px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    transition: width 0.3s ease;
+    box-shadow: 0 0 8px rgba(102, 204, 255, 0.6);
+}
+
+nav ul li:hover::after { width: 80%; }
+nav ul li.active::after { width: 100%; }
+
+/* LEAVE 按鈕的特殊金色 */
+nav ul li.leave-btn {
+    color: #d4af37 !important;
+    border-left: 1px solid rgba(212, 175, 55, 0.3);
+    margin-left: 15px; 
+    padding-left: 20px;
+}
+
+nav ul li.leave-btn:hover {
+    color: #f1c40f !important;
+}
+/* Transitions */
+.page {
+    position: absolute;
+    top: 85px; 
+    left: 0; 
+    width: 100%; 
+    height: calc(100vh - 85px); /* Uses viewport height to perfectly fit the screen */
+    opacity: 0; 
+    visibility: hidden;
+    transition: opacity 0.7s ease, transform 0.7s ease;
+    transform: translateY(25px);
+    overflow-y: auto; /* 👈 This is the magic line that restores scrolling! */
+    -webkit-overflow-scrolling: touch; /* 👈 Ensures smooth scrolling on mobile phones */
+}
+
+.page.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    /* Do NOT put display: flex here */
+}
+
+#home {
+    top: 0; height: 100%;
+    background-image: url('Image/Home.png'); 
+    background-size: cover; background-position: center; z-index: 1;
+}
+/* About Card Styles */
+#about {
+    display: block;
+    position: absolute; /* Ensures it stays in the page flow */
+    top: 85px;
+    left: 0;
+    width: 100%;
+    /* Changed height to auto to allow the content to define the length */
+    height: calc(100vh - 85px); 
+    padding-top: 10px;    /* Reduced from 60px to bring "About DIRUNE" up */
+    padding-bottom: 300px; /* Large value to ensure space at the very bottom */
+    overflow-y: scroll;   /* Explicitly allow vertical scrolling */
+    -webkit-overflow-scrolling: touch;
+}
+
+.about-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding-top: 40px; 
+    min-height: min-content; /* Critical: tells the container to grow with cards */
+}
+
+.rules-card-content {
+    flex: 1; /* Since there is no image on the right, let it take full width */
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the title and text block */
+    text-align: center;  /* Centers the text lines */
+}
+
+.rules-text {
+    margin-top: 20px;
+    width: 100%;
+}
+
+.rules-text p {
+    font-size: 1.05rem;
+    line-height: 2.2; /* Increased line height for better readability like the screenshot */
+    color: var(--text-main);
+    margin-bottom: 10px;
+    font-weight: bold; /* Optional: adds a bit of weight to match the screenshot look */
+}
+
+.rules-wrapper {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.rules-intro {
+    color: var(--text-main);
+    margin-bottom: 40px;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.rules-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 100px;
+}
+
+/* 分類卡片樣式 (Category Card Styles) */
+.rules-category {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 30px 40px;
+    text-align: left;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: transform 0.3s ease;
+}
+
+.rules-category:hover {
+    transform: translateY(-5px);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 10px;
+}
+
+.category-header .icon {
+    font-size: 1.5rem;
+}
+
+.category-header h3 {
+    margin: 0;
+    color: var(--text-main);
+    letter-spacing: 1px;
+}
+
+/* 列表樣式 (List Styles) */
+.rules-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.rules-list li {
+    position: relative;
+    padding-left: 25px;
+    margin-bottom: 15px;
+    line-height: 1.8;
+    color: #5d4037;
+}
+
+.rules-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* 特殊強調：警告色與開心色 (Danger and Joy colors) */
+.rules-list li.danger {
+    color: #d32f2f;
+    font-weight: bold;
+}
+
+.rules-list li.joy {
+    color: #2e7d32;
+    font-weight: bold;
+    font-size: 1.1rem;
+    margin-top: 25px;
+    text-align: center;
+    padding-left: 0;
+}
+.rules-list li.joy::before { content: ""; }
+
+/* 響應式微調 (Responsive tweak) */
+@media (max-width: 600px) {
+    .rules-category { padding: 25px; }
+}
+
+/* Footer Logo Styling in About Tab - Positioned Bottom Right */
+.about-footer-logo {
+    width: 100%;
+    /* Removed max-width and margin: 0 auto to break out of the center constraint */
+    display: flex;
+    justify-content: flex-end; /* Aligns the logo to the far right */
+    padding-right: 80px;          /* Removes the 5% right padding */
+    padding-top: 0;            /* Removes the 50px gap you had before */
+    margin-top: 0px;         /* Pulls the logo up to cancel out the Rules card's 40px bottom margin */
+    padding-bottom: 0px;     /* Keeps space at the very bottom of the page so it isn't cut off */
+}
+
+.footer-brand-logo {
+    max-width: 250px; /* 👈 Lower this number until the logo is the perfect size */
+    width: 100%;
+    max-height: 120px;
+    display: block;
+    opacity: 0;
+    filter: drop-shadow(0 5px 15px rgba(0,0,0,0.1));
+}
+
+.section-subtitle {
+    font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--text-main);
+    margin-top: -10px;          /* Adjusted to sit nicely under title */
+    margin-bottom: 20px;
+    text-align: center;
+    letter-spacing: 2px;
+}
+
+.section-title {
+    margin-top: 10px;           /* Ensure it starts below the header area */
+    margin-bottom: 25px;
+    font-size: 2.5rem;
+    color: var(--text-main);
+    text-align: center;
+}
+
+.about-card { 
+    display: flex; 
+    max-width: 1050px; 
+    width: 95%; 
+    background-color: var(--bg-card); 
+    border-radius: 35px; 
+    overflow: hidden; 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
+    margin-top: 50px;           /* Added more padding between cards */
+    margin-bottom: 40px;        /* Added more padding between cards */
+}
+
+.about-content {
+    flex: 1.5;
+    padding: 40px; /* Adjusted padding to prevent overcrowding */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Vertically center the text and button */
+    text-align: center;
+}
+.discord-center-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    width: 100%;
+}
+
+.discord-pill-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    background-color: #5865F2; /* Discord Official Blue */
+    color: white !important;
+    padding: 10px 25px;
+    border-radius: 50px; /* Creates the pill shape */
+    font-weight: bold;
+    transition: transform 0.2s ease;
+}
+
+.discord-pill-button:hover {
+    transform: scale(1.05);
+}
+
+/* This is the critical fix for the giant icon in your second image */
+.discord-img-large {
+    width: 50px; /* Matches the size in your original screenshot */
+    height: auto;
+    display: block;
+}
+
+.story-lines p {
+    margin-bottom: 10px;
+    line-height: 1.8;
+    font-size: 1rem;
+    color: #5d4037;
+}
+.about-image { flex: 1; min-height: 600px; }
+.about-image img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Menu Styles */
+.service-intro-card {
+    background-color: #c9b9a8 !important;
+    border-radius: 25px;
+    padding: 40px;
+    margin-bottom: 60px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    border: 2px dashed #8D6E63;
+    text-align: left;
+}
+
+.intro-header {
+    font-size: 1.6rem;
+    color: var(--dirune-brown);
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.intro-subtitle {
+    color: var(--dirune-brown);
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    text-align: center;
+    opacity: 0.9;
+}
+
+.intro-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.intro-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    background-color: #ece1d6 !important;
+    padding: 20px;
+    border-radius: 15px;
+}
+
+.item-text strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.item-text p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #5d4037;
+}
+
+/* Fix for the images in the dual menu row */
+.dual-menu-row {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#menu .section-title {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-bottom: 40px; /* Space between title and dashed box */
+}
+
+.menu-wrapper {
+    max-width: 950px;
+    margin: 40px auto;
+    padding: 0 20px;
+    text-align: center;
+    padding-bottom: 70px;
+}
+
+.menu-photo-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu-photo-shadow {
+    width: 100%;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.menu-photo-shadow:hover {
+    transform: scale(1.02);
+    box-shadow: 0 25px 60px rgba(0,0,0,0.3);
+}
+
+.menu-jpg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    color: var(--dirune-brown);
+    border-bottom: 2px solid var(--dirune-accent);
+    padding-bottom: 12px;
+    margin-bottom: 40px;
+    display: inline-block;
+}
+
+.attractor-tip {
+    font-size: 0.9rem;
+    color: #795548;
+    text-align: center;
+    margin-top: 20px;
+    font-style: italic;
+}
+
+.menu-image-container {
+    margin-top: 40px;
+}
+
+/* Cat Book Styles */
+.book-container {
+    display: flex; justify-content: center; align-items: center;
+    min-height: 85vh; padding: 40px 20px; perspective: 2000px;
+}
+
+.book {
+    display: flex; width: 1000px; height: 680px;
+    background: #fdfaf1; box-shadow: 20px 20px 60px rgba(0,0,0,0.4);
+    border-radius: 5px 20px 20px 5px; position: relative;
+    border: 1px solid #dcd1ba; transition: transform 0.8s ease-in-out;
+}
+
+/* 📘 Cover Styles */
+.book-cover {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center; z-index: 100;
+    cursor: pointer; transition: transform 1s, opacity 0.6s;
+    border-radius: 5px 20px 20px 5px; overflow: hidden;
+}
+
+.cover-overlay {
+    width: 100%; height: 100%; background: rgba(93, 64, 55, 0.4);
+    display: flex; justify-content: center; align-items: center;
+}
+
+.book:not(.closed) .book-cover {
+    transform: rotateY(-120deg); transform-origin: left;
+    opacity: 0; pointer-events: none;
+}
+
+.cover-content {
+    text-align: center; color: #fff; text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+    padding: 30px 40px; max-width: 400px; margin: 0 auto;
+    border: 3px solid #d4af37; position: relative;
+}
+
+.cover-subtitle {
+    font-family: "Microsoft JhengHei", "微軟正黑體", sans-serif;
+    font-size: 2.5rem; margin-top: 0; margin-bottom: 0;
+    font-weight: bold; color: #d4af37; letter-spacing: 5px;
+}
+
+.cover-hint {
+    margin-top: 40px; font-size: 1.2rem;
+    background: rgba(212, 175, 55, 0.9); color: #5d4037;
+    padding: 12px 25px; border-radius: 50px; font-weight: bold;
+    font-family: "Microsoft JhengHei", sans-serif;
+    animation: pulse 2s infinite; display: inline-block;
+}
+
+@keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.05); } 100% { transform: scale(1); } }
+
+/* 📖 Inner Page Styles */
+.book-page { flex: 1; padding: 50px; display: flex; flex-direction: column; }
+.book.closed .book-page { opacity: 0; }
+.left-page { background: #fcf8ec; border-right: 1px solid rgba(0,0,0,0.1); justify-content: center; }
+
+.book-img-wrapper {
+    width: 100%; aspect-ratio: 3/4; border: 12px solid white;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.15); overflow: hidden;
+    border: 5px solid #c9b9a8; transition: all 0.3s ease;
+}
+.left-page:has(img[alt="Inu"]) .book-img-wrapper { border: 5px double #d4af37 !important; }
+.book-img-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+
+.right-page {
+    background: #fdfaf1; font-family: "Microsoft JhengHei", sans-serif;
+    position: relative; padding-bottom: 120px;
+}
+
+.book-title {
+    font-size: 2.6rem; color: #5d4037; border-bottom: 3px solid #d4af37;
+    padding-bottom: 10px; margin-top: -10px; font-weight: bold;
+}
+
+.book-meta { margin-bottom: 10px; }
+.book-meta p { margin: 4px 0; font-size: 0.95rem; }
+
+.book-divider {
+    border: none; border-top: 1px solid rgba(93, 64, 55, 0.3);
+    margin: 10px 0; width: 100%;
+}
+
+.book-bio {
+    line-height: 1.6; color: #555; height: 260px; overflow-y: auto;
+    padding-right: 10px; margin-top: 5px; -webkit-overflow-scrolling: touch;
+}
+.book-bio::-webkit-scrollbar { width: 6px; }
+.book-bio::-webkit-scrollbar-track { background: rgba(0,0,0,0.05); border-radius: 10px; }
+.book-bio::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
+
+.book-content { flex: 1; display: flex; flex-direction: column; justify-content: flex-start; }
+
+/* 🎮 Book Controls */
+.book-controls {
+    position: absolute; bottom: 50px; left: 50px; right: 50px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: inherit; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.05);
+}
+
+.nav-btn { background: #5d4037; color: white; border: none; padding: 12px 25px; border-radius: 50px; cursor: pointer; font-weight: bold; }
+.nav-btn:hover { background: #d4af37; }
+
+.close-book-btn {
+    position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%);
+    background: none; border: 1px solid #ccc; color: #999; cursor: pointer;
+    border-radius: 5px; padding: 5px 15px; font-size: 0.8rem;
+}
+
+#bookName:has(span) { color: #5d4037; }
+
+/* Music Toggle */
+.music-toggle { position: fixed; bottom: 80px; right: 30px; z-index: 2000; cursor: pointer; background: rgba(0,0,0,0.5); padding: 10px 20px; border-radius: 50px; color: white; display: flex; align-items: center; gap: 10px; }
+
+/* Footer */
+footer { position: fixed; bottom: 15px; width: 100%; text-align: center; font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); z-index: 1000; pointer-events: none; }
+
+/* Lightbox */
+.lightbox-overlay { display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.85); justify-content: center; align-items: center; }
+.lightbox-overlay img { max-width: 90%; max-height: 90%; border-radius: 5px; }

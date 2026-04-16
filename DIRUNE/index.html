@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VESPERA | RP</title>
+    <link rel="icon" type="image/png" href="https://i.imgur.com/AK1Hbub.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kalam:wght@300;400;700&family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<audio id="bgm" loop>
+    <source src="https://www.dropbox.com/scl/fi/3h5gixndlak2mgygluquq/Track-in-Time-Piano-Version.mp3?rlkey=zofpza1p3lwamce0xu95jfpjs&st=l4lzlxlu&raw=1" type="audio/mpeg">
+</audio>
+
+<div class="music-toggle" onclick="toggleMusic()" id="musicBtn">
+    <span id="music-icon">🎵</span>
+    <span class="music-text">BGM OFF</span>
+</div>
+
+<header>
+<header>
+<nav>
+    <ul>
+        <li onclick="goTo('#home')">HOME</li>
+        <li onclick="goTo('#about')">ABOUT US</li>
+        <li onclick="goTo('#menu')">MENU</li>
+        <li onclick="goTo('#cats')">CATS</li>
+        <li onclick="goTo('#rules')">RULES</li>
+        <li onclick="location.href='../index.html'" class="leave-btn">LEAVE 🚪</li>
+    </ul>
+</nav>
+</header>
+</header>
+
+<div id="home" class="page active"></div>
+
+<div id="about" class="page">
+    <div class="about-wrapper">
+        <h1 class="section-title">About DIRUNE</h1>
+        <p class="section-subtitle">泰坦｜海霧村｜10區30號</p>
+        
+        <div class="about-card">
+            <div class="about-content">
+                <div class="text-top">
+                    <h3 class="owner-title">店長的話 / Owner's Message</h3>
+                    <div class="story-lines">
+                        <p>在艾奧傑亞的喧囂之外，我們建立了一個名為 **DIRUNE** 的避風港。</p>
+                        <p>這裡不只是一家咖啡廳，更是我們對「溫暖」與「貓咪」的所有想像。</p>
+                        <p>起初，這裡只是一個小小的想法，希望有一個空間，</p>
+                        <p>讓旅人們能放下武器與冒險的疲憊，靜靜地聽著流水聲，</p>
+                        <p>與毛茸茸的店員們度過一段無憂無慮的時光。</p>
+                        <p>無論你是獨自前來尋找寧靜，還是與好友共聚，</p>
+                        <p>DIRUNE 永遠留有一盞燈，與一抹淡淡的奶油焦糖香，等候你的到來。</p>
+                        </div>
+                </div>
+                
+
+                <div class="discord-center-container">
+                    <a href="https://discord.gg/ep9aXhp7Yf" target="_blank" class="discord-pill-button">
+                        <img src="Image/Discord_icon.png" alt="Discord Icon" class="discord-img-large">
+                        <span>加入我們獲取最新消息</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="about-image">
+                <img src="Image/AboutUS.png" alt="DIRUNE Owner">
+            </div>
+        </div>
+
+        <div class="about-card">
+            <div class="about-content rules-card-content">
+                <h3 class="owner-title">入店須知 / Rules</h3>
+                <div class="rules-text">
+                    <p>1. 進入本店，請將武器及寵物收起來，以免嚇到對氣味敏感的貓咪。</p>
+                    <p>2. 本店可隨意參觀，亦可隨意去撫摸頭上帶有「希望組隊」標誌的貓咪們。</p>
+                    <p>3. 本店試業期間入場費為 5,000 GIL。如需即場指名請私訊店長 Inu。</p>
+                    <p>4. 店內的每隻貓咪性格各異，請多與他們交流互動去了解他們吧！</p>
+                    <p>5. 本店不提供 ERP 服務，請在雙方都能接受的程度下暢談。</p>
+                    <p>6. 營業時間請密切留意店家 DC / Threads 獲得最新消息。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-footer-logo">
+            <img src="Image/DIRUNE_Logo.png" alt="DIRUNE Logo" class="footer-brand-logo">
+        </div>
+
+    </div>
+</div>
+
+<div id="menu" class="page">
+    <div class="menu-wrapper">
+        <h1 class="section-title" style="color: #5d4037;">Special Menu</h1>
+        
+        <div class="service-intro-card">
+            <div class="intro-header">🐾 關於邂逅：隨緣的溫暖</div>
+            <p class="intro-subtitle">在 DIRUNE，我們不提供公式化的熱情，只期待最自然的邂逅。貓咪們擁有自由的靈魂，請享受這段隨性的陪伴。</p>
+            
+            <div class="intro-grid">
+                <div class="intro-item">
+                    <span class="icon">✨</span>
+                    <div class="item-text">
+                        <strong style="color: #8D6E63;">主動呼喚</strong>
+                        <p style="margin-top: 8px;">
+                            嘗試對角色狀態為 
+                            <img src="Image/Available_Logo.png" alt="待機中" style="height: 20px; vertical-align: middle; margin: 0 5px;">
+                            的貓咪使用「撫摸」或「打招呼」，互動將由此展開。
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="intro-item">
+                    <span class="icon">🐱</span>
+                    <div class="item-text">
+                        <strong style="color: #8D6E63;">自由意志</strong>
+                        <p style="margin-top: 8px;">互動的時間與方式由貓咪決定。若您輕聲呼喚，或許能換得一次心動的凝視。</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="attractor-tip">若想增加與貓咪結緣的機會，歡迎參考下方菜單中的【誘惑工具】。</p>
+        </div>
+
+        <div class="menu-image-container">
+            <h2 class="category-title">Cat Attractors & Human Treats</h2>
+            
+            <div class="dual-menu-row">
+                <div class="menu-photo-column">
+                    <div class="menu-photo-shadow">
+                        <img src="Image/Attractors_Menu.png" alt="Cat Attractors Menu" class="menu-jpg">
+                    </div>
+                </div>
+
+                <div class="menu-photo-column">
+                    <div class="menu-photo-shadow">
+                        <img src="Image/Menu.png" alt="Human Treats Menu" class="menu-jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="cats" class="page">
+    <div class="book-container">
+        <div class="book closed" id="catBook">
+           <div class="book-cover" onclick="openBook()" style="background-image: url('Image/DIRUNE_Logo.png');">
+                <div class="cover-overlay">
+                    <div class="cover-content box-minimized">
+                        <h2 class="cover-subtitle">員工資料</h2>
+                        <p class="cover-hint">點擊此處查閱</p>
+                    </div>
+                </div>
+            </div>
+            <div class="book-page left-page">
+                <div class="book-img-wrapper"><img id="bookImg" src="" alt="Cat Photo"></div>
+            </div>
+            <div class="book-page right-page">
+                <div class="book-content">
+                    <h1 id="bookName" class="book-title"></h1>
+                    <div class="book-meta">
+                        <p><strong>性別：</strong><span id="bookGender"></span></p>
+                        <p><strong>種族：</strong><span id="bookRace"></span></p>
+                        <p><strong>喜好：</strong><span id="bookLike"></span></p>
+                        <p><strong>個性：</strong><span id="bookPersonality"></span></p>
+                    </div>
+                    <hr class="book-divider">
+                    <div class="book-bio"><p id="bookBio"></p></div>
+                </div>
+                <div class="book-controls">
+                    <button class="nav-btn" onclick="prevPage()">◀ 上一頁</button>
+                    <span class="page-num"><span id="currentPage">1</span> / <span id="totalPages">18</span></span>
+                    <button class="nav-btn" onclick="nextPage()">下一頁 ▶</button>
+                </div>
+                <button class="close-book-btn" onclick="closeBook()">回到封面</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="rules" class="page">
+    <div class="rules-wrapper">
+        <h1 class="section-title">Rules & Guidelines</h1>
+        <p class="rules-intro">歡迎來到 DIRUNE！為了確保你在這裡可以得到最完美的體驗，請在享用服務前閱讀以下規範：</p>
+
+        <div class="rules-container">
+            
+            <div class="rules-category">
+                <div class="category-header">
+                    <span class="icon">☕</span>
+                    <h3>基本服務與流程</h3>
+                </div>
+                <ul class="rules-list">
+                    <li>本店定位為「交流互動貓咪咖啡廳」，服務內容僅限於陪伴、聊天、音樂演奏及菜單上的項目。</li>
+                    <li>為確保服務流程順暢，相關服務將在點單並付款後正式進行。</li>
+                </ul>
+            </div>
+
+            <div class="rules-category highlight">
+                <div class="category-header">
+                    <span class="icon">🐾</span>
+                    <h3>社交與 RP 禮儀</h3>
+                </div>
+                <ul class="rules-list">
+                    <li class="danger">嚴禁涉及一切性暗示、情色話題。一經發現，我們將立即停止服務並列入黑名單。</li>
+                    <li>貓咪們以「輕 RP」為主調服務，禁止打探現實資訊（如性別、年齡等現實世界隱私）。</li>
+                    <li>請勿對貓咪提出令人不適的要求，貓咪有權拒絕互動並回報店長處理。</li>
+                    <li>營業時間外貓咪為普通玩家，嚴禁騷擾、跟蹤或探查 RP 設定以外的個人隱私。</li>
+                    <li class="joy">最後最重要的規則：請在這裡玩得開心！</li>
+                </ul>
+            </div>
+
+            <div class="rules-category">
+                <div class="category-header">
+                    <span class="icon">📷</span>
+                    <h3>攝影與社群分享</h3>
+                </div>
+                <ul class="rules-list">
+                    <li>進行拍攝前請取得貓咪同意，或與其商量合照服務（本店目前無此固定品項）。</li>
+                    <li>若使用與「魔法」有關的拍攝工具，請勿公開上傳至社交平台（濾鏡不在此限）。</li>
+                    <li>分享照片至社群（如 Threads、FB、IG、噗浪）請標記照片中之店員或店長 Inu，並加上 Tag：#DIRUNEFFXIVTC。</li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="lightbox" class="lightbox-overlay" onclick="this.style.display='none'">
+    <img id="lightbox-img" src="" alt="Large Menu">
+</div>
+
+<footer>
+    FINAL FANTASY XIV © 2010 - 2026 SQUARE ENIX CO., LTD. All Rights Reserved.
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
