@@ -18,13 +18,13 @@ function enterDirune() {
     }, 800);
 }
 
-// 跳轉到 NOCTIS
+// 修改玄關進入 NOCTIS 的函數
 function enterNoctis() {
     const lp = document.getElementById('landing-page');
-    lp.style.opacity = '0'; // 執行玄關淡出
+    lp.style.opacity = '0';
     setTimeout(() => {
-        // 正式跳轉到 NOCTIS 資料夾
-        window.location.href = "NOCTIS/index.html";
+        // 跳轉時帶上播放參數
+        window.location.href = "NOCTIS/index.html?autoplay=true";
     }, 800);
 }
 // 修改玄關的進入函數

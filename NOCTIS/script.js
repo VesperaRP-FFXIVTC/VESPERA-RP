@@ -1,20 +1,81 @@
+// --- 🎛️ 音訊處理中心 ---
+let audioCtx;
+let source;
+let filter;
+let noctisBgm;
+let isAudioStarted = false;
+
+const audioPath = 'Audio/noctis-bgm.mp3'; 
+
+function initAudio() {
+    if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        noctisBgm = new Audio(audioPath);
+        noctisBgm.loop = true;
+        
+        source = audioCtx.createMediaElementSource(noctisBgm);
+        filter = audioCtx.createBiquadFilter();
+
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(150, audioCtx.currentTime); // 初始水底聲
+
+        source.connect(filter);
+        filter.connect(audioCtx.destination);
+    }
+}
+
+// 🔊 [核心修改] 檢查網址並自動啟動水底音
+window.addEventListener('load', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('autoplay') === 'true') {
+        initAudio();
+        noctisBgm.currentTime = 20; // 跳過前奏
+        
+        // 嘗試播放
+        noctisBgm.play().then(() => {
+            isAudioStarted = true;
+            console.log("從玄關銜接的水底音樂已啟動");
+        }).catch(err => {
+            // 如果瀏覽器攔截，改為監聽「第一次隨意點擊」來啟動
+            console.log("自動播放被攔截，等待玩家點擊頁面...");
+            document.addEventListener('click', startAudioManually, { once: true });
+        });
+    }
+});
+
+function startAudioManually() {
+    if (!isAudioStarted) {
+        initAudio();
+        noctisBgm.play();
+        isAudioStarted = true;
+    }
+}
+
+// 🎭 揭開夜幕 (點擊 Logo)
 function openShow() {
+    if (!isAudioStarted) startAudioManually();
+
     const curtain = document.getElementById('noctis-curtain');
     const mainContent = document.getElementById('noctis-main');
 
-    // 1. 給布幕加上 'open' class，觸發 CSS 拉開動畫
-    curtain.classList.add('open');
+    // 音樂變清晰
+    if (filter && audioCtx) {
+        filter.frequency.exponentialRampToValueAtTime(20000, audioCtx.currentTime + 1.2);
+    }
 
-    // 2. 顯示主內容容器，並加上 'show' class 觸發淡入
-    mainContent.style.display = 'block';
-    setTimeout(() => {
-        mainContent.classList.add('show');
-    }, 100); // 稍微延遲確保 display:block 已生效
+    // 動畫啟動
+    if (curtain) {
+        curtain.classList.add('open');
+    }
+    
+    // 顯示內容
+    if (mainContent) {
+        mainContent.style.display = 'block';
+        setTimeout(() => mainContent.classList.add('show'), 100);
+    }
 
-    // 3. 動畫結束後，徹底移除布幕層，防止擋到下方的點擊
     setTimeout(() => {
         curtain.style.display = 'none';
-        // 恢復頁面捲動
-        document.body.style.overflow = 'auto'; 
-    }, 1600); // 時間要比 CSS 的 1.5s 稍微長一點
+        document.body.style.overflow = 'auto';
+    }, 1600);
 }
