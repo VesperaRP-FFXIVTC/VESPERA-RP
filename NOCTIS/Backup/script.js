@@ -2,7 +2,6 @@
 let audioCtx;
 let source;
 let filter;
-let gainNode; // 1. 新增音量節點變數
 let noctisBgm;
 let isAudioStarted = false;
 
@@ -16,27 +15,12 @@ function initAudio() {
         
         source = audioCtx.createMediaElementSource(noctisBgm);
         filter = audioCtx.createBiquadFilter();
-        gainNode = audioCtx.createGain(); // 2. 創建音量控制節點
 
         filter.type = 'lowpass';
-        filter.frequency.setValueAtTime(150, audioCtx.currentTime); 
+        filter.frequency.setValueAtTime(150, audioCtx.currentTime); // 初始水底聲
 
-        // 3. 設定初始音量 (0.0 到 1.0)
-        // 例如設定為 0.5 (50% 音量)
-        gainNode.gain.setValueAtTime(0.2, audioCtx.currentTime);
-
-        // 4. 修改連接順序
         source.connect(filter);
-        filter.connect(gainNode); // 連接到音量節點
-        gainNode.connect(audioCtx.destination); // 最後才輸出到喇叭
-    }
-}
-
-// 5. 新增一個可以隨時調較音量的 function
-function setVolume(value) {
-    if (gainNode) {
-        // value 範圍建議為 0.0 ~ 1.0
-        gainNode.gain.setTargetAtTime(value, audioCtx.currentTime, 0.1);
+        filter.connect(audioCtx.destination);
     }
 }
 

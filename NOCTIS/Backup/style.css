@@ -1,0 +1,150 @@
+/* --- 基礎設定 --- */
+body.noctis-theme {
+    margin: 0; padding: 0;
+    background-color: #000; /* 深夜黑色 */
+    color: #fff;
+    font-family: 'Poppins', sans-serif; /* 選擇更現代俐落的字體 */
+    overflow: hidden; /* 動화期間防止捲動 */
+}
+
+/* --- 🎭 布幕層樣式 --- */
+#noctis-curtain {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100vh;
+    z-index: 9999; /* 確保在最上層 */
+    cursor: pointer;
+    display: flex; justify-content: center; align-items: center;
+    overflow: hidden;
+}
+
+/* --- [ 修正部分 ] 🎭 布幕內容排版校準 --- */
+.curtain-content {
+    position: relative;
+    z-index: 100;
+    text-align: center;
+    transition: opacity 0.5s ease;
+    /* 新增：確保內容垂直居中，並給予一定的寬度限制 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%; /* 限制寬度，防止Logo在超大螢幕上貼邊 */
+    max-width: 1000px; /* 設定最大寬度 */
+    height: auto;
+}
+
+/* --- [ 修正部分 ] 🌟 放大霓虹 Logo --- */
+.neon-logo {
+    /* 1. 從 max-width: 300px 大幅增加 */
+    width: 100%; /* 填滿 parent 容器的寬度 */
+    max-width: 3600px; /* 設定一個理想的最大寬度 (原本的2倍以上) */
+    
+    height: auto; /* 保持比例 */
+    margin-bottom: -50px; /* 與下方文字保持距離 */
+    
+    /* 2. 強化霓虹光暈 (配合 Logo 放大) */
+    filter: drop-shadow(0 0 15px rgba(138, 43, 226, 0.9));
+    
+    /* 3. 保持呼吸動畫 */
+    animation: neonPulse 2s infinite alternate;
+}
+
+.click-to-enter {
+    color: rgba(255, 255, 255, 0.7);
+    letter-spacing: 2px;
+    margin-top: 20px;
+}
+
+/* 布幕主體 (使用黑色漸層模擬綢緞) */
+.curtain-part {
+    position: absolute;
+    top: 0; width: 50%; height: 100%;
+    background: linear-gradient(to right, #000 0%, #1a1a1a 50%, #000 100%);
+    transition: transform 1.5s cubic-bezier(0.645, 0.045, 0.355, 1); /* 絲滑的拉開曲線 */
+}
+
+.curtain-part.left { left: 0; border-right: 1px solid rgba(255,255,255,0.1); }
+.curtain-part.right { right: 0; border-left: 1px solid rgba(255,255,255,0.1); }
+
+/* --- 🎬 拉開動畫狀態 --- */
+#noctis-curtain.open .curtain-part.left { transform: translateX(-100%); }
+#noctis-curtain.open .curtain-part.right { transform: translateX(100%); }
+#noctis-curtain.open .curtain-content { opacity: 0; pointer-events: none; }
+
+/* --- 🌟 官網主內容樣式 (預設隱藏) --- */
+#noctis-main {
+    opacity: 0;
+    transition: opacity 1s ease 0.8s; /* 等布幕拉開一半再淡入 */
+}
+
+#noctis-main.show {
+    opacity: 1;
+    display: block !important;
+}
+
+/* 霓虹文字效果 */
+.neon-text {
+    font-size: 3rem;
+    color: #fff;
+    text-align: center;
+    margin-top: 20vh;
+    text-shadow: 0 0 10px #8a2be2, 0 0 20px #8a2be2, 0 0 30px #8a2be2;
+}
+
+/* --- ✨ 霓虹呼吸動畫定義 --- */
+@keyframes neonPulse {
+    0% { filter: drop-shadow(0 0 5px rgba(138, 43, 226, 0.6)); opacity: 0.9; }
+    100% { filter: drop-shadow(0 0 20px rgba(138, 43, 226, 1)); opacity: 1; }
+}
+/* --- [ 修正部分 ] 美化「準備中」訊息 --- */
+.coming-soon-container {
+    margin-top: 20px;
+    animation: flicker 0.8s infinite;
+}
+
+.neon-text-small {
+    font-size: 2rem; /* 稍微放大字體 */
+    color: #8a2be2;
+    text-shadow: 0 0 8px #8a2be2, 0 0 15px #8a2be2;
+    letter-spacing: 8px; /* 增加字距，更有設計感 */
+    margin-bottom: 15px;
+}
+
+.construction-text {
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+/* --- [ 修正部分 ] 美化返回按鈕 --- */
+.back-to-portal {
+    margin-top: 60px;
+    color: #d4af37; /* 香檳金 */
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.back-to-portal:hover {
+    background-color: rgba(212, 175, 55, 0.1);
+    text-shadow: 0 0 10px #d4af37;
+    border-color: rgba(212, 175, 55, 0.8);
+    letter-spacing: 1px;
+}
+
+/* 模擬霓虹燈閃爍的動畫 */
+/* 模擬快節奏、不穩定的霓虹閃爍 */
+@keyframes flicker {
+    0%, 10%, 100% { opacity: 1; }
+    5% { opacity: 0.2; }
+    7% { opacity: 1; }
+    12% { opacity: 0.3; }
+    15% { opacity: 1; }
+    20% { opacity: 0.1; }
+    25% { opacity: 1; }
+}
